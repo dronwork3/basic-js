@@ -1,14 +1,10 @@
-const FALL = ['Sep', 'Oct', 'Nov']
-const WINTER = ['Dec', 'Jan', 'Feb']
-const SPRING = ['Mar', 'Apr', 'May']
-const SUMMER = ['Jun', 'Jul', 'Aug']
-
-module.exports = function getSeason(date) {
-  if (typeof date === 'undefined' ) return 'Unable to determine the time of year!'
-  if(!(date instanceof Date)) throw new Error()
-  let season = date.toDateString().split(' ')[1]
-  if(FALL.includes(season)) return 'fall';
-  if(WINTER.includes(season)) return 'winter';
-  if(SPRING.includes(season)) return 'spring'
-  if(SUMMER.includes(season)) return 'summer'
+module.exports = function getSeason(date = "123") {
+  if (date == "123") { return "Unable to determine the time of year!" }
+  if (typeof (date) != "object" || date.constructor !== Date || date.hasOwnProperty('toString')) { throw Error; } else {
+    let d = date.getMonth();
+    if (d == 11 || d <= 1) { return "winter" }
+    else if (d <= 4) { return "spring" }
+    else if (d <= 7) { return "summer" }
+    else { return "autumn" }
+  }
 };
